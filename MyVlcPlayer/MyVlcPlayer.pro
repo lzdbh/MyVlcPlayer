@@ -23,4 +23,4 @@ HEADERS  += \
 FORMS    += mainwindow.ui
 
 INCLUDEPATH+= sdk/include
-LIBS+= -LE:\qt-test\MyVlcPlayer\sdk\lib -llibvlc -llibvlccore
+LIBS+= -L$${PWD}/sdk/lib -llibvlc -llibvlccore
