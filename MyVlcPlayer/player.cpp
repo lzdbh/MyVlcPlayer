@@ -61,16 +61,6 @@ Player::Player()
     connect(_positionSlider, SIGNAL(sliderMoved(int)), this, SLOT(changePosition(int)));
 
 
-    connect(this,SIGNAL(doubleClicked()),SLOT(onDoubleClicked()));
-
-    _videoWidget->installEventFilter(this);
-
-    libvlc_video_set_mouse_input(_mp,1);
-
-
-
-    isFullScreen=false;
-
     poller->start(100); //start timer to trigger every 100 ms the updateInterface slot
 
 }
@@ -175,38 +165,4 @@ void Player::setMuted(bool muted)
     controls->setMuted(muted);
 }
 
-void Player::onDoubleClicked()
-{
-    if(isFullScreen)
-    {
-        qDebug()<<" 222222222222222222222222222222";
-        _videoWidget->setParent(this);
-        isFullScreen=false;
-    }else
-    {
-        isFullScreen=true;
-        //_videoWidget->setParent(NULL);
-        _videoWidget->setWindowFlags(_videoWidget->windowFlags() | Qt::Window | Qt::WindowStaysOnTopHint);
-        _videoWidget->setWindowState(_videoWidget->windowState() | Qt::WindowFullScreen);
-        _videoWidget->show();
-    }
-}
 
-bool Player::eventFilter(QObject *target, QEvent *event)
-{
-    if(target==_videoWidget)
-    {
-
-        if(event->type()==QEvent::MouseButtonDblClick)
-        {
-            qDebug()<<"event->type()";
-            QMouseEvent *mouseEvent=static_cast<QMouseEvent *>(event);
-            if(mouseEvent->button()==Qt::LeftButton)
-            {
-                emit doubleClicked();
-                //return QWidget::eventFilter(target,event); //why?
-            }
-        }
-    }
-    return QWidget::eventFilter(target,event);
-}

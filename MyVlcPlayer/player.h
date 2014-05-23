@@ -42,17 +42,6 @@ public slots:
     void pause();
     void stop();
     void setMuted(bool muted);
-    void onDoubleClicked();
-
-protected:
-    bool eventFilter(QObject *target, QEvent *event);
-
-signals:
-    void doubleClicked();
-
-private:
-    bool isFullScreen;
-
 };
 
 #endif // PLAYER_H
