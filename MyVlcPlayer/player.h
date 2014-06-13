@@ -3,6 +3,7 @@
 
 #include <vlc/vlc.h>
 #include <QWidget>
+#include <QChildEvent>
 #include "playercontrols.h"
 
 class QVBoxLayout;
@@ -42,6 +43,17 @@ public slots:
     void pause();
     void stop();
     void setMuted(bool muted);
+    void onDoubleClicked();
+
+protected:
+    bool eventFilter(QObject *target, QEvent *event);
+
+signals:
+    void doubleClicked();
+
+private:
+    bool isFullScreen;
+
 };
 
 #endif // PLAYER_H

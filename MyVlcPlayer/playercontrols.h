@@ -2,7 +2,7 @@
 #define PLAYERCONTROLS_H
 
 #include <QWidget>
-#include <vlc/vlc.h>
+#include <vlc-qt/Enums.h>
 
 QT_BEGIN_NAMESPACE
 class QAbstractButton;
@@ -16,12 +16,12 @@ class PlayerControls : public QWidget
 public:
     PlayerControls(QWidget *parent = 0);
 
-    libvlc_state_t state() const;
+    Vlc::State state() const;
     int volume() const;
     bool isMuted() const;
 
 public slots:
-    void setState(libvlc_state_t state);
+    void setState(Vlc::State state);
     void setVolume(int volume);
     void setMuted(bool muted);
 
@@ -39,7 +39,7 @@ private slots:
     void muteClicked();
 
 private:
-    libvlc_state_t playerState;
+    Vlc::State playerState;
     bool playerMuted;
     QAbstractButton *playButton;
     QAbstractButton *stopButton;
